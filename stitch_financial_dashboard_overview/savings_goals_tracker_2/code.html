@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Savings Goals Tracker - Dark Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#22d3ee","surface-dark": "#111827","card-dark": "#1f2937","background-dark": "#0b0f1a",},
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            .fill-icon {
+                font-variation-settings: 'FILL' 1;
+            }
+            .glow-primary {
+                box-shadow: 0 0 15px -3px rgba(34, 211, 238, 0.4);
+            }
+            .glow-amber {
+                box-shadow: 0 0 15px -3px rgba(245, 158, 11, 0.4);
+            }
+            .glow-rose {
+                box-shadow: 0 0 15px -3px rgba(244, 63, 94, 0.4);
+            }
+            .progress-ring-glow {
+                filter: drop-shadow(0 0 4px currentColor);
+            }
+        }
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 flex-shrink-0 border-r border-slate-800 bg-surface-dark">
+<div class="flex flex-col h-full p-6">
+<div class="flex items-center gap-3 mb-10">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-slate-900 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined fill-icon">account_balance_wallet</span>
+</div>
+<div>
+<h1 class="text-white text-lg font-extrabold tracking-tight">FinFlow</h1>
+<p class="text-primary text-xs font-semibold uppercase tracking-wider">Premium Plan</p>
+</div>
+</div>
+<nav class="space-y-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-sm font-semibold">Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20 shadow-lg shadow-primary/5" href="#">
+<span class="material-symbols-outlined fill-icon">savings</span>
+<span class="text-sm font-semibold">Savings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-semibold">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="text-sm font-semibold">Reports</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-semibold">Profile</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-slate-800">
+<div class="flex items-center gap-3 p-2 rounded-xl bg-slate-800/50">
+<div class="w-10 h-10 rounded-full bg-cover bg-center border border-slate-700" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1S-9X8fHFv7ZtbdlhSIfOiNNitdSqzwidXv_dN9_2aEj4kdmtuHCPu5Mx8F5YyEpOg3SghK3Orz-W7cd853YFSh_IZa9JgNfi91NEXHEWKH-bprc68YbSg9e1NKrD0N9bqo2glssp247xMy5tm8R2nZ_W1_IbmQ1I1LCOr3qSkhoNem3an6JUoDftu94zTq1qoLy3ze9QiDZGbI7YOLk99TXV73CfgmxF9_dT39ngayJTiu4mVunbhOGFjokmupsl7ftk5mCtBCs");'></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate text-white">Alex Morgan</p>
+<p class="text-[10px] text-slate-400 font-medium uppercase">Settings</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm cursor-pointer hover:text-white transition-colors">settings</span>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-background-dark overflow-y-auto">
+<header class="p-8 pb-4">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<h2 class="text-4xl font-extrabold tracking-tight text-white">Savings Goals</h2>
+<p class="text-slate-400 font-medium">You have 4 active goals and you're ahead of schedule on 2 of them.</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="bg-card-dark p-1 rounded-xl flex border border-slate-800">
+<button class="px-5 py-2 text-sm font-bold rounded-lg bg-slate-700 shadow-sm text-white">Active</button>
+<button class="px-5 py-2 text-sm font-bold rounded-lg text-slate-400 hover:text-white transition-colors">Completed</button>
+</div>
+<button class="flex items-center gap-2 bg-primary text-slate-900 px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-primary/30 hover:shadow-primary/50 hover:translate-y-[-2px] transition-all">
+<span class="material-symbols-outlined font-bold">add</span>
+                        Add New Goal
+                    </button>
+</div>
+</div>
+</header>
+<div class="p-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="group bg-card-dark rounded-2xl p-6 shadow-xl border border-slate-800/50 hover:border-primary/30 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined text-3xl fill-icon">shield</span>
+</div>
+<span class="px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full border border-primary/30">On Track</span>
+</div>
+<div class="mb-6">
+<h3 class="text-xl font-extrabold text-white mb-1">Emergency Fund</h3>
+<p class="text-slate-400 text-sm font-medium">Financial safety net</p>
+</div>
+<div class="flex items-center gap-6 mb-4">
+<div class="relative flex-shrink-0">
+<svg class="w-24 h-24 transform -rotate-90">
+<circle class="text-slate-800" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary progress-ring-glow" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="45.2" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-lg font-black text-white">82%</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-2xl font-black text-white">$8,240</span>
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Target: $10,000</span>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-800 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">event</span>
+<span class="text-xs font-bold text-slate-400">DEC 2024</span>
+</div>
+<button class="text-sm font-bold text-slate-300 hover:text-primary transition-colors flex items-center gap-1">
+                            Details
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="group bg-card-dark rounded-2xl p-6 shadow-xl border border-slate-800/50 hover:border-amber-400/30 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-amber-400/10 rounded-2xl flex items-center justify-center text-amber-400 border border-amber-400/20">
+<span class="material-symbols-outlined text-3xl fill-icon">beach_access</span>
+</div>
+<span class="px-3 py-1 bg-amber-400/20 text-amber-400 text-[10px] font-bold uppercase tracking-widest rounded-full border border-amber-400/30">Paced</span>
+</div>
+<div class="mb-6">
+<h3 class="text-xl font-extrabold text-white mb-1">Dream Vacation</h3>
+<p class="text-slate-400 text-sm font-medium">Santorini Expedition</p>
+</div>
+<div class="flex items-center gap-6 mb-4">
+<div class="relative flex-shrink-0">
+<svg class="w-24 h-24 transform -rotate-90">
+<circle class="text-slate-800" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-amber-400 progress-ring-glow" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="138.16" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-lg font-black text-white">45%</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-2xl font-black text-white">$2,250</span>
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Target: $5,000</span>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-800 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-400 text-sm">event</span>
+<span class="text-xs font-bold text-slate-400">MAY 2025</span>
+</div>
+<button class="text-sm font-bold text-slate-300 hover:text-amber-400 transition-colors flex items-center gap-1">
+                            Details
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="group bg-card-dark rounded-2xl p-6 shadow-xl border border-slate-800/50 hover:border-primary/30 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20">
+<span class="material-symbols-outlined text-3xl fill-icon">electric_car</span>
+</div>
+<span class="px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full border border-primary/30">Early Days</span>
+</div>
+<div class="mb-6">
+<h3 class="text-xl font-extrabold text-white mb-1">New Tesla</h3>
+<p class="text-slate-400 text-sm font-medium">Model 3 Performance</p>
+</div>
+<div class="flex items-center gap-6 mb-4">
+<div class="relative flex-shrink-0">
+<svg class="w-24 h-24 transform -rotate-90">
+<circle class="text-slate-800" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary progress-ring-glow" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="213.5" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-lg font-black text-white">15%</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-2xl font-black text-white">$6,750</span>
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Target: $45,000</span>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-800 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">event</span>
+<span class="text-xs font-bold text-slate-400">AUG 2026</span>
+</div>
+<button class="text-sm font-bold text-slate-300 hover:text-primary transition-colors flex items-center gap-1">
+                            Details
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="group bg-card-dark rounded-2xl p-6 shadow-xl border border-slate-800/50 hover:border-rose-500/30 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-rose-500/10 rounded-2xl flex items-center justify-center text-rose-500 border border-rose-500/20">
+<span class="material-symbols-outlined text-3xl fill-icon">favorite</span>
+</div>
+<span class="px-3 py-1 bg-rose-500/20 text-rose-500 text-[10px] font-bold uppercase tracking-widest rounded-full border border-rose-500/30">Behind</span>
+</div>
+<div class="mb-6">
+<h3 class="text-xl font-extrabold text-white mb-1">Wedding Fund</h3>
+<p class="text-slate-400 text-sm font-medium">Summer Celebration</p>
+</div>
+<div class="flex items-center gap-6 mb-4">
+<div class="relative flex-shrink-0">
+<svg class="w-24 h-24 transform -rotate-90">
+<circle class="text-slate-800" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-rose-500 progress-ring-glow" cx="48" cy="48" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="100.48" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-lg font-black text-white">60%</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-2xl font-black text-white">$12,000</span>
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Target: $20,000</span>
+</div>
+</div>
+<div class="pt-6 border-t border-slate-800 flex justify-between items-center">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-rose-500 text-sm">event</span>
+<span class="text-xs font-bold text-slate-400">SEP 2025</span>
+</div>
+<button class="text-sm font-bold text-slate-300 hover:text-rose-500 transition-colors flex items-center gap-1">
+                            Details
+                            <span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="group border-2 border-dashed border-slate-800 rounded-2xl p-6 flex flex-col items-center justify-center text-center space-y-4 hover:bg-primary/5 hover:border-primary/50 transition-all cursor-pointer">
+<div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-primary group-hover:text-slate-900 transition-all duration-300">
+<span class="material-symbols-outlined text-4xl">add</span>
+</div>
+<div>
+<p class="text-lg font-bold text-white">Start New Goal</p>
+<p class="text-slate-500 text-sm max-w-[200px] mx-auto">Dreaming of something big? Start today.</p>
+</div>
+</div>
+</div>
+<div class="mt-12 bg-gradient-to-r from-primary/20 via-primary/5 to-transparent border border-primary/20 rounded-2xl p-8 flex flex-col md:flex-row items-center gap-8 relative overflow-hidden">
+<div class="relative z-10 flex-1">
+<h4 class="text-2xl font-extrabold text-white mb-2 italic">"Do not save what is left after spending, but spend what is left after saving."</h4>
+<p class="text-primary font-bold">— Warren Buffett</p>
+</div>
+<div class="relative z-10 hidden md:block">
+<div class="w-32 h-32 bg-primary rounded-full flex items-center justify-center text-slate-900 shadow-2xl shadow-primary/30 rotate-12">
+<span class="material-symbols-outlined text-6xl fill-icon">trending_up</span>
+</div>
+</div>
+<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 rounded-full blur-3xl opacity-30"></div>
+<div class="absolute -bottom-10 -left-10 w-60 h-60 bg-primary/10 rounded-full blur-3xl opacity-20"></div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

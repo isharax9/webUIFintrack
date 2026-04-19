@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding: Set Initial Goals</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1b9883",
+                        "background-light": "#f1f2f4",
+                        "background-dark": "#121416",
+                        "surface-dark": "#1c1f23",
+                        "surface-border": "#2d3238",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .goal-card:hover .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+            color: #1b9883;
+        }
+        .goal-card.selected {
+            border-color: #1b9883;
+            background-color: rgba(27, 152, 131, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300">
+<div class="layout-container flex flex-col min-h-screen">
+<!-- Navigation / Top Bar -->
+<nav class="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">account_balance_wallet</span>
+</div>
+<span class="font-extrabold text-xl tracking-tight">VANTAGE</span>
+</div>
+<button class="text-sm font-medium text-gray-500 hover:text-primary transition-colors">Save &amp; Exit</button>
+</nav>
+<main class="flex-1 flex flex-col items-center px-6 py-10 max-w-5xl mx-auto w-full">
+<!-- Progress Indicator -->
+<div class="w-full max-w-md mb-12">
+<div class="flex justify-between items-end mb-3">
+<span class="text-xs font-bold uppercase tracking-widest text-primary">Step 2 of 3</span>
+<span class="text-xs font-medium text-gray-500">SET GOALS</span>
+</div>
+<div class="h-1.5 w-full bg-gray-200 dark:bg-surface-border rounded-full overflow-hidden flex">
+<div class="h-full bg-primary/30 w-1/3"></div>
+<div class="h-full bg-primary w-1/3"></div>
+<div class="h-full bg-transparent w-1/3"></div>
+</div>
+</div>
+<!-- Hero Section -->
+<div class="text-center mb-12 max-w-2xl">
+<h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-400">
+                    What are your financial priorities?
+                </h1>
+<p class="text-lg text-gray-400 font-normal leading-relaxed">
+                    Select the areas you'd like to focus on first. We'll tailor your budgeting experience to help you hit these targets.
+                </p>
+</div>
+<!-- Bento Grid Goal Selection -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mb-16">
+<!-- Goal Tile 1 -->
+<div class="goal-card group relative p-6 bg-white dark:bg-surface-dark border-2 border-transparent dark:border-surface-border rounded-xl cursor-pointer hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/5">
+<div class="mb-4 w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 group-hover:text-primary">shield</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Emergency Fund</h3>
+<p class="text-sm text-gray-500 leading-snug">Prepare for the unexpected with a dedicated safety net.</p>
+</div>
+<!-- Goal Tile 2 (Selected Example) -->
+<div class="goal-card selected group relative p-6 bg-white dark:bg-surface-dark border-2 border-primary rounded-xl cursor-pointer shadow-xl shadow-black/10">
+<div class="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">credit_card_off</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Pay Off Debt</h3>
+<p class="text-sm text-gray-400 leading-snug">Crush high-interest loans and regain your financial freedom.</p>
+<div class="absolute top-4 right-4 text-primary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+</div>
+<!-- Goal Tile 3 -->
+<div class="goal-card group relative p-6 bg-white dark:bg-surface-dark border-2 border-transparent dark:border-surface-border rounded-xl cursor-pointer hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/5">
+<div class="mb-4 w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 group-hover:text-primary">flight_takeoff</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Dream Vacation</h3>
+<p class="text-sm text-gray-500 leading-snug">Set money aside for your next big adventure across the globe.</p>
+</div>
+<!-- Goal Tile 4 -->
+<div class="goal-card group relative p-6 bg-white dark:bg-surface-dark border-2 border-transparent dark:border-surface-border rounded-xl cursor-pointer hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/5">
+<div class="mb-4 w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 group-hover:text-primary">home_work</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Home Ownership</h3>
+<p class="text-sm text-gray-500 leading-snug">Build your down payment for the keys to your new home.</p>
+</div>
+<!-- Goal Tile 5 -->
+<div class="goal-card group relative p-6 bg-white dark:bg-surface-dark border-2 border-transparent dark:border-surface-border rounded-xl cursor-pointer hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/5">
+<div class="mb-4 w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 group-hover:text-primary">trending_up</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Retirement Growth</h3>
+<p class="text-sm text-gray-500 leading-snug">Invest in your future self by maximizing your nest egg.</p>
+</div>
+<!-- Goal Tile 6 -->
+<div class="goal-card group relative p-6 bg-white dark:bg-surface-dark border-2 border-transparent dark:border-surface-border rounded-xl cursor-pointer hover:border-primary/50 transition-all duration-300 shadow-xl shadow-black/5">
+<div class="mb-4 w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-gray-600 dark:text-gray-400 group-hover:text-primary">receipt_long</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Better Budgeting</h3>
+<p class="text-sm text-gray-500 leading-snug">Gain total clarity on where your money goes every single month.</p>
+</div>
+</div>
+<!-- Bottom Navigation Section -->
+<div class="flex flex-col items-center gap-6 w-full max-w-sm">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold h-14 rounded-xl transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 group">
+<span>Continue to Next Step</span>
+<span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<div class="flex items-center gap-4">
+<button class="text-sm font-medium text-gray-500 hover:text-white transition-colors">I'll do this later</button>
+<span class="w-1 h-1 bg-gray-700 rounded-full"></span>
+<button class="text-sm font-medium text-gray-500 hover:text-white transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+                        Back
+                    </button>
+</div>
+</div>
+</main>
+<!-- Footer Decoration -->
+<footer class="py-10 flex justify-center opacity-20 pointer-events-none overflow-hidden">
+<div class="flex gap-4 transform -rotate-6 scale-110">
+<div class="w-48 h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full"></div>
+<div class="w-64 h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full"></div>
+<div class="w-32 h-1 bg-gradient-to-r from-transparent via-primary to-transparent rounded-full"></div>
+</div>
+</footer>
+</div>
+</body></html>

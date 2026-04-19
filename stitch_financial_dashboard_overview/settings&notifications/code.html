@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>User Settings &amp; Notifications - FinFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#00d1c1", // Brighter teal accent for dark mode
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#0f1719", // Deeper dark for body
+                        "surface-dark": "#1a2426", // Dark grey for containers
+                        "input-dark": "#232f32", // Lighter grey for input fields
+                        "accent-warning": "#f2a154",
+                        "accent-danger": "#ff5c5c",
+                        "accent-success": "#00e676"
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background: linear-gradient(90deg, rgba(0, 209, 193, 0.1) 0%, rgba(0, 209, 193, 0) 100%);
+            border-left: 3px solid #00d1c1;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+        }.peer:checked ~ .toggle-bg {
+            @apply bg-primary;
+        }
+        .peer:checked ~ .toggle-dot {
+            @apply translate-x-5;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 font-display transition-colors duration-300">
+<div class="flex h-screen overflow-hidden">
+<aside class="w-64 border-r border-slate-800 flex flex-col bg-surface-dark shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-slate-900 font-bold">account_balance_wallet</span>
+</div>
+<h1 class="text-xl font-extrabold tracking-tight text-white">FinFlow</h1>
+</div>
+<nav class="flex-1 px-3 mt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">category</span>
+<span class="font-medium">Categories</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-medium">Transactions</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">track_changes</span>
+<span class="font-medium">Goals</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-medium">Insights</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-800">
+<a class="flex items-center gap-3 p-2 rounded-xl bg-primary/10 border-l-4 border-primary" href="#">
+<div class="w-10 h-10 rounded-full bg-center bg-cover border-2 border-primary/30" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBkHsr5_Nuxj6xUAv248_s92JnPyj7Ls_0RaK4h3fbUh_661HW-vS1L0T3smtWIwjJnwB_k4NtnpX4tISkeVgqN-mgUVQX4lgvMn_OWD6_SBWOeApmKo5iCvO91JZgyYiIFL5gupPzyJTKzd2vJk6wpJG5oZcXvbvPVi1y4mSlohsp2rMC95FJW4cg_ne9yqJGHEoe13j2ppmk-MEp0zRPWyVUQpkIrQyDq0rrTbc1l7jlOVV6hC37_ndnmoPO-QFgAe_SbiHzsKm0')"></div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate text-white">Alex Morgan</p>
+<p class="text-xs text-primary font-semibold truncate">Settings</p>
+</div>
+<button class="ml-auto text-primary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1">settings</span>
+</button>
+</a>
+</div>
+</aside>
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-dark">
+<header class="sticky top-0 z-10 bg-background-dark/80 backdrop-blur-md px-8 py-6 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800">
+<div>
+<h2 class="text-3xl font-black text-white">Settings &amp; Notifications</h2>
+<p class="text-slate-400 mt-1">Manage your account preferences and security settings.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 border border-slate-700 text-slate-300 font-bold rounded-lg hover:bg-surface-dark transition-all">
+                    Discard Changes
+                </button>
+<button class="px-5 py-2.5 bg-primary text-slate-900 font-bold rounded-lg hover:brightness-110 shadow-lg shadow-primary/20 transition-all active:scale-95">
+                    Save Changes
+                </button>
+</div>
+</header>
+<div class="p-8 max-w-4xl space-y-8">
+<section class="bg-surface-dark p-8 rounded-2xl border border-slate-800 shadow-xl">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">person</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white">Profile Information</h3>
+<p class="text-slate-400 text-sm">Update your personal details and public profile.</p>
+</div>
+</div>
+<div class="flex flex-col md:flex-row gap-8">
+<div class="flex flex-col items-center gap-4">
+<div class="relative group">
+<div class="w-32 h-32 rounded-full border-4 border-slate-700 overflow-hidden bg-background-dark">
+<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV653Ht0w1HWSHkA-7LPdVANA5cN-Bv94S0hwRwZnZQZOjtoU32hTdZ_CLM6gJ0MBk88Ek7jp2WRVySxscxINuGLx67L_hgByOtSEHTsO58ObDjLPnsYHHNmY-vLW1JqzGr2_uUJnkd8ngIbGsIpw0IKsJw_9vtUrPcNGrpN6f2x1o9SxaQOpR9DwVudsSPnW5LfLzFuHB-_YOwiE4wjWB4s_qnRUnC-o6S_io6dPq3x2h_4uzu5BGO2f6jwenlDAmues37nHs0dg"/>
+</div>
+<button class="absolute bottom-0 right-0 p-2 bg-primary text-slate-900 rounded-full shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<p class="text-xs text-slate-500 text-center">Recommended: 400x400px<br/>PNG or JPG</p>
+</div>
+<div class="flex-1 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-300">Full Name</label>
+<input class="w-full bg-input-dark border-slate-700 text-white rounded-lg px-4 py-2.5 focus:ring-primary focus:border-primary transition-colors" type="text" value="Alex Morgan"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-300">Email Address</label>
+<input class="w-full bg-input-dark border-slate-700 text-white rounded-lg px-4 py-2.5 focus:ring-primary focus:border-primary transition-colors" type="email" value="alex.morgan@finflow.com"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-slate-300">Bio</label>
+<textarea class="w-full bg-input-dark border-slate-700 text-white rounded-lg px-4 py-2.5 focus:ring-primary focus:border-primary transition-colors" placeholder="Briefly describe yourself..." rows="3"></textarea>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-dark p-8 rounded-2xl border border-slate-800 shadow-xl">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">notifications</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white">Notification Preferences</h3>
+<p class="text-slate-400 text-sm">Control how and when you receive updates.</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-input-dark/40 rounded-xl border border-slate-800">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-accent-warning/10 rounded-lg">
+<span class="material-symbols-outlined text-accent-warning">warning</span>
+</div>
+<div>
+<p class="font-bold text-white">Budget Alerts</p>
+<p class="text-xs text-slate-400">Get notified when you exceed 80% of a category limit.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 rounded-full peer transition-all toggle-bg"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all toggle-dot"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-input-dark/40 rounded-xl border border-slate-800">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">summarize</span>
+</div>
+<div>
+<p class="font-bold text-white">Monthly Reports</p>
+<p class="text-xs text-slate-400">Receive a detailed summary of your spending habits monthly.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 rounded-full peer transition-all toggle-bg"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all toggle-dot"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-input-dark/40 rounded-xl border border-slate-800">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-accent-success/10 rounded-lg">
+<span class="material-symbols-outlined text-accent-success">event_repeat</span>
+</div>
+<div>
+<p class="font-bold text-white">Bill Reminders</p>
+<p class="text-xs text-slate-400">Keep track of upcoming subscription and utility payments.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 rounded-full peer transition-all toggle-bg"></div>
+<div class="absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-all toggle-dot"></div>
+</label>
+</div>
+</div>
+</section>
+<section class="bg-surface-dark p-8 rounded-2xl border border-slate-800 shadow-xl">
+<div class="flex items-center gap-4 mb-8">
+<div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl">shield</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-white">Security</h3>
+<p class="text-slate-400 text-sm">Protect your account with modern security features.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="space-y-4">
+<h4 class="font-bold text-slate-300">Change Password</h4>
+<div class="space-y-3">
+<input class="w-full bg-input-dark border-slate-700 text-white rounded-lg px-4 py-2.5 focus:ring-primary focus:border-primary transition-colors" placeholder="Current Password" type="password"/>
+<input class="w-full bg-input-dark border-slate-700 text-white rounded-lg px-4 py-2.5 focus:ring-primary focus:border-primary transition-colors" placeholder="New Password" type="password"/>
+<input class="w-full bg-input-dark border-slate-700 text-white rounded-lg px-4 py-2.5 focus:ring-primary focus:border-primary transition-colors" placeholder="Confirm New Password" type="password"/>
+<button class="text-sm font-bold text-primary hover:underline transition-all">Update Password</button>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-slate-300">Two-Factor Authentication</h4>
+<div class="p-5 bg-input-dark/40 rounded-xl border border-dashed border-slate-700">
+<div class="flex items-center gap-3 mb-3 text-accent-success">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span class="text-sm font-bold uppercase tracking-wider">Recommended</span>
+</div>
+<p class="text-sm text-slate-400 mb-4">Add an extra layer of security to your account by requiring a code from your phone at login.</p>
+<button class="w-full py-2.5 bg-primary/10 text-primary font-bold rounded-lg border border-primary/20 hover:bg-primary/20 transition-all">
+                                Enable 2FA
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<section class="p-8 rounded-2xl border border-accent-danger/20 bg-accent-danger/5">
+<div class="flex items-center justify-between gap-4">
+<div>
+<h3 class="text-xl font-bold text-accent-danger">Delete Account</h3>
+<p class="text-slate-400 text-sm mt-1">Permanently remove your account and all associated data. This action cannot be undone.</p>
+</div>
+<button class="px-5 py-2.5 bg-accent-danger text-white font-bold rounded-lg hover:brightness-110 transition-all shadow-lg shadow-accent-danger/10">
+                        Deactivate Account
+                    </button>
+</div>
+</section>
+<div class="py-12 text-center text-slate-500 text-xs">
+                © 2023 FinFlow Budgeting. All financial data is encrypted.
+            </div>
+</div>
+</main>
+</div>
+
+</body></html>

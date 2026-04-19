@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Detailed Transaction Ledger | WealthWise</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135d6c",
+                        "background-light": "#f9fafa",
+                        "background-dark": "#0f1115",
+                        "surface-dark": "#16191d",
+                        "surface-dark-alt": "#1c2127",
+                        "border-dark": "#2d343c",
+                        "income": "#4ade80",
+                        "expense": "#f87171",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2d343c;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #375b62;
+        }.dark tbody tr:nth-child(even) {
+            background-color: #1a1e24;
+        }
+        .dark tbody tr:nth-child(odd) {
+            background-color: #16191d;
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-100 antialiased h-screen overflow-hidden">
+<div class="flex h-full w-full">
+<aside class="w-64 flex flex-col border-r border-border-dark bg-background-dark shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-none">WealthWise</h1>
+<p class="text-[10px] uppercase tracking-widest text-slate-400 mt-1">Professional Ledger</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary/20 text-primary rounded-lg transition-colors border border-primary/30" href="#">
+<span class="material-symbols-outlined text-xl">list_alt</span>
+<span class="text-sm font-semibold">Transactions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">account_balance</span>
+<span class="text-sm font-medium">Accounts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">pie_chart</span>
+<span class="text-sm font-medium">Budgets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">bar_chart</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<div class="pt-6 pb-2 px-3 text-[10px] font-bold uppercase tracking-widest text-slate-500">Systems</div>
+<a class="flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-primary/10 rounded-lg transition-colors group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 mt-auto border-t border-border-dark">
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white rounded-lg py-2.5 text-sm font-bold shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg">add</span>
+                    New Transaction
+                </button>
+</div>
+</aside>
+<main class="flex-1 flex flex-col min-w-0 bg-background-dark overflow-hidden">
+<header class="p-8 pb-4">
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h2 class="text-3xl font-extrabold tracking-tight text-white">Detailed Ledger</h2>
+<p class="text-slate-400 text-sm">Reviewing 1,284 transactions across 4 accounts.</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-dark border border-border-dark rounded-lg px-4 py-2 shadow-sm">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter mr-2">Total Inflow</span>
+<span class="text-sm font-bold text-income">+$12,450.00</span>
+</div>
+<div class="flex items-center bg-surface-dark border border-border-dark rounded-lg px-4 py-2 shadow-sm">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-tighter mr-2">Total Outflow</span>
+<span class="text-sm font-bold text-expense">-$8,120.45</span>
+</div>
+<button class="flex items-center gap-2 bg-surface-dark hover:bg-border-dark text-white px-4 py-2 rounded-lg text-sm font-bold transition-colors border border-border-dark">
+<span class="material-symbols-outlined text-lg">ios_share</span>
+                            Export
+                        </button>
+</div>
+</div>
+<div class="mt-8 flex flex-wrap items-center gap-3 p-3 bg-surface-dark border border-border-dark rounded-xl shadow-sm">
+<div class="flex-1 min-w-[280px]">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xl group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background-dark/80 border border-border-dark/50 rounded-lg text-sm focus:ring-1 focus:ring-primary focus:border-primary text-white placeholder:text-slate-500 transition-all" placeholder="Search by vendor, note, or reference ID..." type="text"/>
+</div>
+</div>
+<div class="h-6 w-px bg-border-dark hidden md:block mx-1"></div>
+<div class="flex items-center gap-2 flex-wrap">
+<button class="flex items-center gap-2 px-3 py-2 bg-background-dark/80 hover:bg-background-dark rounded-lg border border-border-dark/50 transition-colors">
+<span class="text-xs font-semibold text-slate-400">Date:</span>
+<span class="text-xs font-bold text-white">Last 30 Days</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 bg-background-dark/80 hover:bg-background-dark rounded-lg border border-border-dark/50 transition-colors">
+<span class="text-xs font-semibold text-slate-400">Category:</span>
+<span class="text-xs font-bold text-white">All</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 bg-background-dark/80 hover:bg-background-dark rounded-lg border border-border-dark/50 transition-colors">
+<span class="text-xs font-semibold text-slate-400">Account:</span>
+<span class="text-xs font-bold text-white">Checking</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors" title="Clear Filters">
+<span class="material-symbols-outlined">filter_list_off</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 px-8 pb-8 overflow-hidden flex flex-col">
+<div class="flex-1 overflow-auto custom-scrollbar border border-border-dark rounded-xl bg-surface-dark shadow-xl">
+<table class="w-full text-left border-collapse min-w-[800px]">
+<thead class="sticky top-0 z-10">
+<tr class="bg-background-dark border-b border-border-dark">
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Date</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Description</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Category</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400">Method</th>
+<th class="px-6 py-4 text-[11px] font-bold uppercase tracking-widest text-slate-400 text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-dark/30">
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-medium text-slate-400 whitespace-nowrap">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white group-hover:text-primary transition-colors">Starbucks Coffee</span>
+<span class="text-[11px] text-slate-500 font-medium">Ref: SBX-99281744</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-purple-900/30 text-purple-400 border border-purple-800/20">Food &amp; Drink</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">credit_card</span>
+<span class="text-xs font-semibold">Visa ****1234</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-expense">-$5.50</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-medium text-slate-400 whitespace-nowrap">Oct 23, 2023</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white group-hover:text-primary transition-colors">TechCorp Inc.</span>
+<span class="text-[11px] text-slate-500 font-medium">Monthly Salary Payment</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-emerald-900/30 text-emerald-400 border border-emerald-800/20">Salary</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">payments</span>
+<span class="text-xs font-semibold">Direct Deposit</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-income">+$2,400.00</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-medium text-slate-400 whitespace-nowrap">Oct 22, 2023</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white group-hover:text-primary transition-colors">Apple Store</span>
+<span class="text-[11px] text-slate-500 font-medium">iCloud Subscription</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-blue-900/30 text-blue-400 border border-blue-800/20">Utilities</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">credit_card</span>
+<span class="text-xs font-semibold">Apple Card</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-expense">-$9.99</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-medium text-slate-400 whitespace-nowrap">Oct 21, 2023</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white group-hover:text-primary transition-colors">Chevron Gas</span>
+<span class="text-[11px] text-slate-500 font-medium">Station #00938</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-900/30 text-amber-400 border border-amber-800/20">Transport</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">contactless</span>
+<span class="text-xs font-semibold">Visa ****1234</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-expense">-$52.12</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-medium text-slate-400 whitespace-nowrap">Oct 20, 2023</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white group-hover:text-primary transition-colors">Apartment Rental</span>
+<span class="text-[11px] text-slate-500 font-medium">Rent for November</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-900/30 text-rose-400 border border-rose-800/20">Housing</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">account_balance</span>
+<span class="text-xs font-semibold">ACH Transfer</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-expense">-$1,850.00</span>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors group cursor-pointer">
+<td class="px-6 py-4 text-sm font-medium text-slate-400 whitespace-nowrap">Oct 20, 2023</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<span class="text-sm font-bold text-white group-hover:text-primary transition-colors">Target Corp</span>
+<span class="text-[11px] text-slate-500 font-medium">Groceries &amp; Home</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-indigo-900/30 text-indigo-400 border border-indigo-800/20">Shopping</span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-lg">credit_card</span>
+<span class="text-xs font-semibold">Visa ****1234</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="text-sm font-bold text-expense">-$142.88</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-4 flex flex-wrap items-center justify-between gap-4">
+<p class="text-xs font-semibold text-slate-500">Showing 1 to 20 of 1,284 results</p>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center h-8 w-8 rounded bg-surface-dark border border-border-dark text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_left</span>
+</button>
+<button class="flex items-center justify-center h-8 w-8 rounded bg-primary text-white text-xs font-bold">1</button>
+<button class="flex items-center justify-center h-8 w-8 rounded bg-surface-dark border border-border-dark text-slate-400 text-xs font-bold hover:bg-border-dark transition-colors">2</button>
+<button class="flex items-center justify-center h-8 w-8 rounded bg-surface-dark border border-border-dark text-slate-400 text-xs font-bold hover:bg-border-dark transition-colors">3</button>
+<span class="text-slate-500 px-1">...</span>
+<button class="flex items-center justify-center h-8 w-8 rounded bg-surface-dark border border-border-dark text-slate-400 text-xs font-bold hover:bg-border-dark transition-colors">64</button>
+<button class="flex items-center justify-center h-8 w-8 rounded bg-surface-dark border border-border-dark text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>
