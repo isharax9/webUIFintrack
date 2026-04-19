@@ -1,6 +1,7 @@
 "use client";
 
 import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import Link from "next/link";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import { useBudgetGoals } from "@/hooks/useBudgetGoals";
 import { useReportsSummaryAndTrend } from "@/lib/dashboard-composite";
@@ -11,11 +12,19 @@ const now = new Date();
 export default function DashboardPage() {
   const month = now.getMonth() + 1;
   const year = now.getFullYear();
+  const monthStart = new Date(year, month - 1, 1).toISOString();
+  const monthEnd = new Date(year, month, 0, 23, 59, 59, 999).toISOString();
   const { summary, trend, loading } = useReportsSummaryAndTrend(month, year);
   const tx = useTransactions({ page: 1, limit: 5 });
+  const monthlyExpenses = useTransactions({ page: 1, limit: 100, type: "EXPENSE", from: monthStart, to: monthEnd });
   const goals = useBudgetGoals(month, year);
 
-  if (loading || tx.isLoading || goals.isLoading) return <LoadingSpinner label="Loading dashboard..." />;
+  if (loading || tx.isLoading || goals.isLoading || monthlyExpenses.isLoading) return <LoadingSpinner label="Loading dashboard..." />;
+
+  const spentByCategory = (monthlyExpenses.data?.data ?? []).reduce<Record<string, number>>((acc, item) => {
+    acc[item.categoryId] = (acc[item.categoryId] ?? 0) + Number(item.amount);
+    return acc;
+  }, {});
 
   return (
     <div className="space-y-8">
@@ -68,19 +77,30 @@ export default function DashboardPage() {
             <div className="mt-4 space-y-4">
               {goals.data?.map((goal) => (
                 <div key={goal.id}>
-                  <div className="mb-1 flex justify-between text-xs text-on-surface-variant">
-                    <span>{goal.category.name}</span>
-                    <span>${Number(goal.limitAmount).toFixed(2)}</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-surface-high">
-                    <div className="h-full rounded-full bg-primary" style={{ width: "50%" }} />
-                  </div>
+                  {(() => {
+                    const limit = Number(goal.limitAmount);
+                    const spent = spentByCategory[goal.categoryId] ?? 0;
+                    const progress = limit > 0 ? Math.min((spent / limit) * 100, 100) : 0;
+                    const barColor = progress > 80 ? "bg-danger" : progress >= 60 ? "bg-warning" : "bg-primary";
+
+                    return (
+                      <>
+                        <div className="mb-1 flex justify-between text-xs text-on-surface-variant">
+                          <span>{goal.category.name}</span>
+                          <span>${spent.toFixed(2)} / ${limit.toFixed(2)}</span>
+                        </div>
+                        <div className="h-2 rounded-full bg-surface-high">
+                          <div className={`h-full rounded-full ${barColor}`} style={{ width: `${progress}%` }} />
+                        </div>
+                      </>
+                    );
+                  })()}
                 </div>
               ))}
             </div>
           </div>
 
-          <button className="w-full rounded-xl bg-primary py-3 font-bold text-white shadow-glow">Add Transaction</button>
+          <Link href="/transactions" className="block w-full rounded-xl bg-primary py-3 text-center font-bold text-white shadow-glow">Manage Transactions</Link>
         </div>
       </section>
     </div>

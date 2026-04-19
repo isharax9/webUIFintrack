@@ -1,5 +1,3 @@
-"use client";
-
 import { useSummary, useTrend } from "@/hooks/useReports";
 
 export const useReportsSummaryAndTrend = (month: number, year: number) => {

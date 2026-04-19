@@ -5,6 +5,7 @@ import EmptyState from "@/components/shared/EmptyState";
 import LoadingSpinner from "@/components/shared/LoadingSpinner";
 import { useBudgetGoals, useCreateBudgetGoal, useDeleteBudgetGoal } from "@/hooks/useBudgetGoals";
 import { useCategories } from "@/hooks/useCategories";
+import { useTransactions } from "@/hooks/useTransactions";
 
 const now = new Date();
 const month = now.getMonth() + 1;
@@ -15,10 +16,18 @@ export default function BudgetGoalsPage() {
   const [limitAmount, setLimitAmount] = useState("");
   const categories = useCategories();
   const goals = useBudgetGoals(month, year);
+  const monthStart = new Date(year, month - 1, 1).toISOString();
+  const monthEnd = new Date(year, month, 0, 23, 59, 59, 999).toISOString();
+  const monthlyExpenses = useTransactions({ page: 1, limit: 100, type: "EXPENSE", from: monthStart, to: monthEnd });
   const createGoal = useCreateBudgetGoal();
   const deleteGoal = useDeleteBudgetGoal();
 
-  if (categories.isLoading || goals.isLoading) return <LoadingSpinner label="Loading budget goals..." />;
+  if (categories.isLoading || goals.isLoading || monthlyExpenses.isLoading) return <LoadingSpinner label="Loading budget goals..." />;
+
+  const spentByCategory = (monthlyExpenses.data?.data ?? []).reduce<Record<string, number>>((acc, item) => {
+    acc[item.categoryId] = (acc[item.categoryId] ?? 0) + Number(item.amount);
+    return acc;
+  }, {});
 
   return (
     <div className="space-y-6">
@@ -41,9 +50,21 @@ export default function BudgetGoalsPage() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {goals.data.map((goal) => (
             <div key={goal.id} className="rounded-xl border border-outline/40 bg-surface p-5">
-              <h3 className="font-bold">{goal.category.name}</h3>
-              <p className="mt-1 text-sm text-on-surface-variant">Limit: ${Number(goal.limitAmount).toFixed(2)}</p>
-              <div className="mt-4 h-2 rounded-full bg-surface-high"><div className="h-full w-1/2 rounded-full bg-primary" /></div>
+              {(() => {
+                const limit = Number(goal.limitAmount);
+                const spent = spentByCategory[goal.categoryId] ?? 0;
+                const progress = limit > 0 ? Math.min((spent / limit) * 100, 100) : 0;
+                const barColor = progress > 80 ? "bg-danger" : progress >= 60 ? "bg-warning" : "bg-primary";
+                return (
+                  <>
+                    <h3 className="font-bold">{goal.category.name}</h3>
+                    <p className="mt-1 text-sm text-on-surface-variant">${spent.toFixed(2)} / ${limit.toFixed(2)}</p>
+                    <div className="mt-4 h-2 rounded-full bg-surface-high">
+                      <div className={`h-full rounded-full ${barColor}`} style={{ width: `${progress}%` }} />
+                    </div>
+                  </>
+                );
+              })()}
               <button className="mt-4 text-sm font-bold text-danger" onClick={() => deleteGoal.mutate(goal.id)}>Delete</button>
             </div>
           ))}

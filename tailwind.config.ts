@@ -25,8 +25,8 @@ const config: Config = {
         glow: "0 0 18px rgba(19,93,108,0.25)",
       },
       fontFamily: {
-        headline: ["var(--font-plus-jakarta)", "sans-serif"],
-        body: ["var(--font-manrope)", "sans-serif"],
+        headline: ["Plus Jakarta Sans", "Manrope", "sans-serif"],
+        body: ["Manrope", "sans-serif"],
       },
     },
   },

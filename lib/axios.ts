@@ -10,9 +10,6 @@ interface RetryConfig extends AxiosRequestConfig {
 export const api = axios.create({
   baseURL,
   withCredentials: true,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 const refreshAccessToken = async () => {
