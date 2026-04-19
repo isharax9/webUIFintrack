@@ -36,8 +36,13 @@ export const useLogin = () => {
 
   return useMutation({
     mutationFn: async (payload: { email: string; password: string }) => {
-      const { data } = await api.post<AuthResponse>("/api/auth/login", payload);
-      return data;
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Invalid credentials");
+      return (await response.json()) as AuthResponse;
     },
     onSuccess: (data) => {
       setAuth(data.accessToken, data.user);
@@ -54,8 +59,13 @@ export const useRegister = () => {
 
   return useMutation({
     mutationFn: async (payload: { name: string; email: string; password: string }) => {
-      const { data } = await api.post<AuthResponse>("/api/auth/register", payload);
-      return data;
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error("Unable to register");
+      return (await response.json()) as AuthResponse;
     },
     onSuccess: (data) => {
       setAuth(data.accessToken, data.user);
